@@ -38,7 +38,7 @@ router.put("/update/:id", async (req, res) => {
   try {
     const appointmentId = req.params.id; const updatedAppointment = req.body 
     const appointment = await appointmentsService.updatedAppointment(appointmentId,updatedAppointment);
-    return res.status(200).json(appointment);
+    return res.status(201).json(appointment);
   } catch (error) {
     res.status(500).json({ message: "Error updating appointment", error });
     console.log("Error updating appointment:", error.message);
@@ -48,8 +48,8 @@ router.put("/update/:id", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   try {
     const appointmentId = req.params.id;
-    await appointmentsService.deleteAppointment(appointmentId);
-    return res.status(204).send();
+    const deleteAppointment = await appointmentsService.deleteAppointment(appointmentId);
+    return res.status(201).json(deleteAppointment);
   } catch (error) {
     res.status(500).json({ message: "Error deleting appointment", error });
     console.log("Error deleting appointment:", error.message);
